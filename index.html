@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Animado</title>
+
+  <!-- DaisyUI + Tailwind -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.18/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            fadeIn: 'fadeIn 0.6s ease-out',
+            slideUp: 'slideUp 0.6s ease-out',
+            pop: 'pop 0.3s ease-in-out',
+            spinSlow: 'spin 2s linear infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: 0 },
+              '100%': { transform: 'translateY(0)', opacity: 1 }
+            },
+            pop: {
+              '0%': { transform: 'scale(0.9)' },
+              '100%': { transform: 'scale(1)' }
+            }
+          }
+        }
+      },
+      plugins: [daisyui],
+      daisyui: {
+        themes: ["light", "dark"]
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/phosphor-icons@1.4.2/src/css/phosphor.css">
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-base-200 transition-all duration-300">
+
+  <div class="w-full max-w-md p-8 shadow-2xl rounded-2xl bg-base-100 animate-slideUp animate-fadeIn">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-primary animate-pop">Entrar</h2>
+      <button class="btn btn-sm btn-ghost" onclick="toggleTheme()" title="Alternar tema">
+        <i class="ph ph-moon text-xl dark:inline-block hidden animate-spinSlow"></i>
+        <i class="ph ph-sun text-xl dark:hidden inline-block animate-spinSlow"></i>
+      </button>
+    </div>
+
+    <form class="flex flex-col gap-4">
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Email</span>
+        </div>
+        <div class="relative">
+          <input type="email" placeholder="usuario@email.com" class="input input-bordered w-full pl-10 transition-transform duration-200 focus:scale-[1.02]" required />
+          <i class="ph ph-envelope absolute left-3 top-3.5 text-gray-400 animate-pop"></i>
+        </div>
+      </label>
+
+      <label class="form-control w-full">
+        <div class="label">
+          <span class="label-text">Senha</span>
+        </div>
+        <div class="relative">
+          <input type="password" placeholder="••••••••" class="input input-bordered w-full pl-10 transition-transform duration-200 focus:scale-[1.02]" required />
+          <i class="ph ph-lock-keyhole absolute left-3 top-3.5 text-gray-400 animate-pop"></i>
+        </div>
+      </label>
+
+      <button type="submit" class="btn btn-primary w-full mt-4 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg">Entrar</button>
+    </form>
+
+    <div class="mt-6 text-center text-sm text-base-content/70 animate-fadeIn">
+      Não tem conta? <a href="#" class="link link-hover text-primary">Cadastre-se</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+    }
+  </script>
+
+</body>
+</html>
