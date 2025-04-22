@@ -1,95 +1,244 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login Animado</title>
-
-  <!-- DaisyUI + Tailwind -->
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.18/dist/full.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          animation: {
-            fadeIn: 'fadeIn 0.6s ease-out',
-            slideUp: 'slideUp 0.6s ease-out',
-            pop: 'pop 0.3s ease-in-out',
-            spinSlow: 'spin 2s linear infinite',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: 0 },
-              '100%': { opacity: 1 }
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(30px)', opacity: 0 },
-              '100%': { transform: 'translateY(0)', opacity: 1 }
-            },
-            pop: {
-              '0%': { transform: 'scale(0.9)' },
-              '100%': { transform: 'scale(1)' }
-            }
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Moderno</title>
+    
+    <!-- Tailwind CSS e DaisyUI via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-      },
-      plugins: [daisyui],
-      daisyui: {
-        themes: ["light", "dark"]
-      }
-    };
-  </script>
-  <link rel="stylesheet" href="https://unpkg.com/phosphor-icons@1.4.2/src/css/phosphor.css">
+        
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-card {
+            max-width: 400px;
+            width: 90%;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--fallback-bc,oklch(var(--bc)/0.5));
+        }
+        
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--fallback-bc,oklch(var(--bc)/0.8));
+            transition: color 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            color: var(--fallback-p,oklch(var(--p)));
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            border-radius: 0.5rem;
+            background-color: var(--fallback-b2,oklch(var(--b2)));
+            border: 1px solid var(--fallback-bc,oklch(var(--bc)/0.2));
+            color: var(--fallback-bc,oklch(var(--bc)));
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--fallback-p,oklch(var(--p)));
+            box-shadow: 0 0 0 2px var(--fallback-p,oklch(var(--p)/0.2));
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background-color: var(--fallback-p,oklch(var(--p)));
+            color: var(--fallback-pc,oklch(var(--pc)));
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--fallback-pf,oklch(var(--pf)));
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--fallback-bc,oklch(var(--bc)/0.2));
+        }
+        
+        .divider-text {
+            padding: 0 1rem;
+            color: var(--fallback-bc,oklch(var(--bc)/0.6));
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            background-color: var(--fallback-b2,oklch(var(--b2)));
+            border: 1px solid var(--fallback-bc,oklch(var(--bc)/0.2));
+            color: var(--fallback-bc,oklch(var(--bc)));
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .social-btn:hover {
+            background-color: var(--fallback-b3,oklch(var(--b3)));
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 640px) {
+            .login-card {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .theme-toggle {
+                top: 0.75rem;
+                right: 0.75rem;
+            }
+        }
+    </style>
 </head>
-
-<body class="min-h-screen flex items-center justify-center bg-base-200 transition-all duration-300">
-
-  <div class="w-full max-w-md p-8 shadow-2xl rounded-2xl bg-base-100 animate-slideUp animate-fadeIn">
-    <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-primary animate-pop">Entrar</h2>
-      <button class="btn btn-sm btn-ghost" onclick="toggleTheme()" title="Alternar tema">
-        <i class="ph ph-moon text-xl dark:inline-block hidden animate-spinSlow"></i>
-        <i class="ph ph-sun text-xl dark:hidden inline-block animate-spinSlow"></i>
-      </button>
+<body>
+    <div class="login-container bg-base-100">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="ph ph-sun" id="theme-icon"></i>
+        </button>
+        
+        <div class="login-card bg-base-200 shadow-xl rounded-xl p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold mb-2">Bem-vindo de volta</h1>
+                <p class="text-base-content/60">Entre com sua conta para continuar</p>
+            </div>
+            
+            <form>
+                <div class="input-group">
+                    <i class="input-icon ph ph-envelope"></i>
+                    <input type="email" class="input-field" placeholder="Email" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="input-icon ph ph-lock"></i>
+                    <input type="password" class="input-field" placeholder="Senha" required>
+                </div>
+                
+                <div class="flex justify-between items-center mb-6">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="checkbox checkbox-sm checkbox-primary">
+                        <span class="text-sm">Lembrar-me</span>
+                    </label>
+                    
+                    <a href="#" class="text-sm text-primary hover:underline">Esqueceu a senha?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Entrar</button>
+            </form>
+            
+            <div class="divider">
+                <span class="divider-text">ou continue com</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn">
+                    <i class="ph ph-google-logo text-xl"></i>
+                </button>
+                <button class="social-btn">
+                    <i class="ph ph-facebook-logo text-xl"></i>
+                </button>
+                <button class="social-btn">
+                    <i class="ph ph-github-logo text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-base-content/60">
+                    Não tem uma conta? 
+                    <a href="#" class="text-primary hover:underline">Registre-se</a>
+                </p>
+            </div>
+        </div>
     </div>
-
-    <form class="flex flex-col gap-4">
-      <label class="form-control w-full">
-        <div class="label">
-          <span class="label-text">Email</span>
-        </div>
-        <div class="relative">
-          <input type="email" placeholder="usuario@email.com" class="input input-bordered w-full pl-10 transition-transform duration-200 focus:scale-[1.02]" required />
-          <i class="ph ph-envelope absolute left-3 top-3.5 text-gray-400 animate-pop"></i>
-        </div>
-      </label>
-
-      <label class="form-control w-full">
-        <div class="label">
-          <span class="label-text">Senha</span>
-        </div>
-        <div class="relative">
-          <input type="password" placeholder="••••••••" class="input input-bordered w-full pl-10 transition-transform duration-200 focus:scale-[1.02]" required />
-          <i class="ph ph-lock-keyhole absolute left-3 top-3.5 text-gray-400 animate-pop"></i>
-        </div>
-      </label>
-
-      <button type="submit" class="btn btn-primary w-full mt-4 transition-all duration-300 hover:scale-[1.03] hover:shadow-lg">Entrar</button>
-    </form>
-
-    <div class="mt-6 text-center text-sm text-base-content/70 animate-fadeIn">
-      Não tem conta? <a href="#" class="link link-hover text-primary">Cadastre-se</a>
-    </div>
-  </div>
-
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const currentTheme = html.getAttribute('data-theme');
-      html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
-    }
-  </script>
-
+    
+    <script>
+        // Função para alternar entre temas claro e escuro
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                themeIcon.classList.remove('ph-sun');
+                themeIcon.classList.add('ph-moon');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('ph-moon');
+                themeIcon.classList.add('ph-sun');
+            }
+        }
+        
+        // Verificar tema inicial e definir o ícone correto
+        document.addEventListener('DOMContentLoaded', function() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (html.getAttribute('data-theme') === 'dark') {
+                themeIcon.classList.add('ph-sun');
+            } else {
+                themeIcon.classList.add('ph-moon');
+            }
+        });
+    </script>
 </body>
 </html>
